@@ -77,7 +77,7 @@ clean: settings
 	@printf "\e[1;34m[INFO] Cleaning $(project_name)\e[00m\n\n"
 	rm $(project_name)
 
-install: settings
+install: build
 	@printf "\e[1;34m[INFO] Installing $(project_name)\e[00m\n\n"
 	go install $(project_name).go
 
