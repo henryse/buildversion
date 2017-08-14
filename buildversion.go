@@ -68,7 +68,6 @@ func main() {
 
 	boolPtr := flag.Bool("version", false, "a bool")
 	flag.StringVar(&image, "image", "", "Image name for this build")
-	flag.StringVar(&image, "image", "", "Image name for this build")
 	flag.StringVar(&imageID, "imageid", "", "Image ID for a given docker file.")
 	flag.StringVar(&fileName, "output", "", "File to write build data to")
 	flag.Parse()
