@@ -23,12 +23,6 @@
 #    OTHER DEALINGS IN THE SOFTWARE.
 #
 # **********************************************************************
-ifdef VERSION
-	project_version:=$(VERSION)
-else
-	project_version:=$(shell git rev-parse --short=8 HEAD)
-endif
-
 ifdef PROJECT_NAME
 	project_name:=$(PROJECT_NAME)
 else
@@ -44,9 +38,8 @@ version:
 
 settings: version
 	@echo [INFO] [settings]
-	@echo [INFO]    project_version=$(project_version)
 	@echo [INFO]    project_name=$(project_name)
-	@echo [INFO]    gogetter = $(GOGETTER)
+	@echo [INFO]    gogetter = $(go_getter)
 	@echo
 
 help: settings
