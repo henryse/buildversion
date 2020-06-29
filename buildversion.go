@@ -50,16 +50,16 @@
 package main
 
 import (
-	"github.com/google/uuid"
-	"log"
-	"flag"
-	"os"
-	"io/ioutil"
 	"encoding/json"
+	"flag"
+	"fmt"
+	"github.com/google/uuid"
+	"github.com/henryse/go-strftime"
+	"io/ioutil"
+	"log"
+	"os"
 	"strings"
 	"time"
-	"github.com/henryse/go-strftime"
-	"fmt"
 )
 
 func main() {
@@ -72,7 +72,7 @@ func main() {
 	flag.StringVar(&fileName, "output", "", "File to write build data to")
 	flag.Parse()
 
-	if *boolPtr == true{
+	if *boolPtr == true {
 		fmt.Println("BuildVerion Version 1.0")
 	} else {
 		if len(image) == 0 || len(imageID) == 0 {
@@ -84,11 +84,11 @@ func main() {
 }
 
 type BuildVersion struct {
-	Version   string                    `json:"version"`
-	BuildTime string                    `json:"build_time"`
-	Image     string                    `json:"image"`
-	ImageID   string                    `json:"image_id"`
-	Versions  map[string]interface{}    `json:"versions"`
+	Version   string                 `json:"version"`
+	BuildTime string                 `json:"build_time"`
+	Image     string                 `json:"image"`
+	ImageID   string                 `json:"image_id"`
+	Versions  map[string]interface{} `json:"versions"`
 }
 
 func generate(fileName string, image string, imageID string) {
@@ -99,7 +99,11 @@ func generate(fileName string, image string, imageID string) {
 		dataInput, err := ioutil.ReadFile(fileName)
 
 		if err == nil {
-			json.Unmarshal(dataInput, buildVersion)
+			err = json.Unmarshal(dataInput, buildVersion)
+		}
+
+		if err != nil {
+			log.Fatalln("[ERROR] ", err)
 		}
 	}
 
@@ -118,7 +122,11 @@ func write(buildVersion *BuildVersion, fileName string) {
 	if err != nil {
 		log.Fatal("Marshaling failed.")
 	} else {
-		ioutil.WriteFile(fileName, dataOutput, 0644)
+		err = ioutil.WriteFile(fileName, dataOutput, 0644)
+
+		if err != nil {
+			log.Fatalln("[ERROR] ", err)
+		}
 	}
 }
 
