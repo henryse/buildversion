@@ -29,8 +29,6 @@ else
 	project_name:=$(shell basename $(CURDIR))
 endif
 
-go_getter := $(shell gogetter --version  2> /dev/null)
-
 version:
 	@echo [INFO] [version]
 	@echo [INFO]    Go Makefile Version 1.0
@@ -39,7 +37,6 @@ version:
 settings: version
 	@echo [INFO] [settings]
 	@echo [INFO]    project_name=$(project_name)
-	@echo [INFO]    gogetter = $(go_getter)
 	@echo
 
 help: settings
@@ -56,10 +53,8 @@ help: settings
 
 libraries: settings
 	@printf "\e[1;34m[INFO] Installing  libraries\e[00m\n\n"
-ifndef go_getter
-	$(error "gogetter is not available please install https://github.com/henryse/gogetter")
-endif
-	gogetter
+	go mod tidy
+	go mod download
 
 build: libraries
 	@printf "\e[1;34m[INFO] Building $(project_name)\e[00m\n\n"

@@ -1,3 +1,0 @@
-# Using this version of go
-github.com/google/uuid
-github.com/henryse/go-strftime
