@@ -29,6 +29,8 @@ else
 	project_name:=$(shell basename $(CURDIR))
 endif
 
+GO111MODULE:=off
+
 version:
 	@echo [INFO] [version]
 	@echo [INFO]    Go Makefile Version 1.0
@@ -53,12 +55,12 @@ help: settings
 
 libraries: settings
 	@printf "\e[1;34m[INFO] Installing  libraries\e[00m\n\n"
-	GO111MODULE=on go mod tidy; go mod download
+	go get github.com/google/uuid
+	go get github.com/henryse/go-strftime
 
 build: libraries
 	@printf "\e[1;34m[INFO] Building $(project_name)\e[00m\n\n"
 	go build $(project_name).go
-
 
 clean: settings
 	@printf "\e[1;34m[INFO] Cleaning $(project_name)\e[00m\n\n"
