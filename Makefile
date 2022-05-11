@@ -53,8 +53,7 @@ help: settings
 
 libraries: settings
 	@printf "\e[1;34m[INFO] Installing  libraries\e[00m\n\n"
-	go mod tidy
-	go mod download
+	GO111MODULE=on go mod tidy; go mod download
 
 build: libraries
 	@printf "\e[1;34m[INFO] Building $(project_name)\e[00m\n\n"
