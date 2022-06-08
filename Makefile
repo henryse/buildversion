@@ -29,8 +29,6 @@ else
 	project_name:=$(shell basename $(CURDIR))
 endif
 
-GO111MODULE:=off
-
 version:
 	@echo [INFO] [version]
 	@echo [INFO]    Go Makefile Version 1.0
